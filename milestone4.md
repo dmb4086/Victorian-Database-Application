@@ -6,7 +6,7 @@ To ensure a production ready application, errors ```caught``` in the data layer 
 
 > Example code handling exceptions thrown by a read operation
 
-```
+```js
 const getBook = (id, callback) => {
 	data.Book.read(id)
 		.then(book => callback(undefined, book))
@@ -24,7 +24,7 @@ Errors to the business layer will primarily be handled by `Express.js` as the er
 
 > Example code handling an error in the data layer, passing it to Express to return as a response with code 502:
 
-```
+```javascript
 app.get("/book/:id", (req, res, next) => {
 	getBook(req.params.id, (err, book) => {
 		if(err){
@@ -43,7 +43,7 @@ Like the `data-layer` errors thrown in this layer will be caught and displayed i
 
 > Example code handling an error in a `fetch` request, triggering the error dialog:
 
-```
+```js
 const Book = ({ id }) => {
 	const [data, setData] = useState(null);
 	const dispatch = useDispatch(); 
