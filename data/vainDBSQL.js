@@ -1,10 +1,9 @@
 // -- CREATE DATABASE vain;
 // -- CREATE SCHEMA vain;
 
-const CheckifDBExists = "SELECT datname FROM pg_catalog.pg_database where datname ='vain';"
+const CheckifDBExists =
+	"SELECT datname FROM pg_catalog.pg_database where datname ='vain';";
 const createDB = `
-
-
 DROP TABLE IF EXISTS vain.book;
 CREATE TABLE vain.book
 (
@@ -101,36 +100,34 @@ CREATE TABLE vain.subject_book (
   PRIMARY KEY (subject_id,book_id),
   CONSTRAINT fk_subject_book_id FOREIGN KEY (book_id) REFERENCES vain.book (book_id) ON DELETE CASCADE,
   CONSTRAINT fk_subject_id FOREIGN KEY (subject_id) REFERENCES vain.subject (subject_id));
-  `
+  `;
 
-  // INSERTS -- 
-  const insertBook = `INSERT INTO book ( title, type, subject, year, description, authorship, publisher, author, notes, located, modifiedBy, lastUpdated, namedPersons) 
+// INSERTS --
+const insertBook = `INSERT INTO book ( title, type, subject, year, description, authorship, publisher, author, notes, located, modifiedBy, lastUpdated, namedPersons) 
   VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 'System', now() $11)
   `;
 
-  const insertNewPublisher = `INSERT INTO vain.publisher ( publisher, publisherlocation, publisherfull) VALUES ($1, $2, $3);`;
+const insertNewPublisher = `INSERT INTO vain.publisher ( publisher, publisherlocation, publisherfull) VALUES ($1, $2, $3);`;
 
-  const insertNewPublisherBook = `INSERT INTO vain.publisher_book ( publisher_id, book_id) VALUES ($1, $2);`;
+const insertNewPublisherBook = `INSERT INTO vain.publisher_book ( publisher_id, book_id) VALUES ($1, $2);`;
 
-  const insertNewAuthor = `INSERT INTO vain.namedPersons ( name, lifeYears) VALUES ($1, $2);`;
+const insertNewAuthor = `INSERT INTO vain.namedPersons ( name, lifeYears) VALUES ($1, $2);`;
 
-  const insertNewAuthorBook = `INSERT INTO vain.author_book ( author_id, book_id) VALUES ($1, $2);`;
+const insertNewAuthorBook = `INSERT INTO vain.author_book ( author_id, book_id) VALUES ($1, $2);`;
 
-  const insertNewSubjectBook = `INSERT INTO vain.subject_book ( book_id, subject_id) VALUES ($1, $2);`;
+const insertNewSubjectBook = `INSERT INTO vain.subject_book ( book_id, subject_id) VALUES ($1, $2);`;
 
-  const insertNewTypeBook = `INSERT INTO vain.type_book ( book_id, type_id) VALUES ($1, $2);`;
+const insertNewTypeBook = `INSERT INTO vain.type_book ( book_id, type_id) VALUES ($1, $2);`;
 
 // Getters
 
 const getPublisherFromBook = `SELECT distinct publisher FROM book;`;
 
-
 const getPublisherWithBookIDFromBook = `SELECT book_id, publisher FROM vain.book;`;
 
 const getPublisherWithPublisherIDFromPublisher = `SELECT publisher_id, publisherfull FROM vain.publisher;`;
 
-                            
-const getAuthorFromBook = `SELECT distinct author FROM vain.book;`; 
+const getAuthorFromBook = `SELECT distinct author FROM vain.book;`;
 
 const getAuthorWithBookIDFromBook = `SELECT book_id, author FROM vain.book;`;
 
@@ -140,10 +137,25 @@ const getTypeWithBookIDFromBook = `SELECT book_id, type FROM vain.book;`;
 
 const getSubjectWithBookIDFromBook = `SELECT book_id, subject FROM vain.book;`;
 
-const scrubTables = `ALTER TABLE public.book DROP COLUMN author, DROP COLUMN type, DROP COLUMN subject, DROP COLUMN publisher;  ALTER TABLE vain.publisher DROP COLUMN publisherfull`
+const scrubTables = `ALTER TABLE public.book DROP COLUMN author, DROP COLUMN type, DROP COLUMN subject, DROP COLUMN publisher;  ALTER TABLE vain.publisher DROP COLUMN publisherfull`;
 
-
-
-module.exports = {createDB, insertBook, getPublisherFromBook, insertNewPublisher, getPublisherWithBookIDFromBook, getPublisherWithPublisherIDFromPublisher, insertNewPublisherBook,
-    getAuthorFromBook, getAuthorWithBookIDFromBook, getAuthorWithAuthorIDFromAuthor, insertNewAuthor, insertNewAuthorBook,CheckifDBExists,
-    getTypeWithBookIDFromBook, insertNewTypeBook,getSubjectWithBookIDFromBook,insertNewSubjectBook, scrubTables};
+module.exports = {
+	createDB,
+	insertBook,
+	getPublisherFromBook,
+	insertNewPublisher,
+	getPublisherWithBookIDFromBook,
+	getPublisherWithPublisherIDFromPublisher,
+	insertNewPublisherBook,
+	getAuthorFromBook,
+	getAuthorWithBookIDFromBook,
+	getAuthorWithAuthorIDFromAuthor,
+	insertNewAuthor,
+	insertNewAuthorBook,
+	CheckifDBExists,
+	getTypeWithBookIDFromBook,
+	insertNewTypeBook,
+	getSubjectWithBookIDFromBook,
+	insertNewSubjectBook,
+	scrubTables,
+};
