@@ -4,23 +4,30 @@
 const CheckifDBExists =
 	"SELECT datname FROM pg_catalog.pg_database where datname ='vain';";
 const createDB = `
+
+DROP DATABASE IF EXISTS vain;
+CREATE DATABASE vain;
+
+DROP SCHEMA IF EXISTS vain;
+CREATE SCHEMA vain;
+
 DROP TABLE IF EXISTS vain.book;
 CREATE TABLE vain.book
 (
-    book_id         SERIAL PRIMARY KEY,
-    title           text,
-    type            varchar(50),
-    subject         varchar(50),
-    year            int DEFAULT NULL,
-    description     text,
-    authorship      varchar(2) DEFAULT NULL,
-    publisher       text,
-    author          text,
-    notes           text,
-    located         varchar(450) DEFAULT NULL,
-    modifiedBy      varchar(45) DEFAULT NULL,
-    lastUpdated     date DEFAULT NULL,
-    namedPersons    text
+      book_id serial PRIMARY KEY NOT NULL,
+      type varchar(2) DEFAULT NULL,
+      authorship varchar(2) DEFAULT NULL,
+      subject varchar(2) DEFAULT NULL,
+      title text,
+      year int DEFAULT NULL,
+      description text,
+      namedPersons text,
+      notes text,
+      located varchar(450) DEFAULT NULL,
+      modifiedBy varchar(45) DEFAULT NULL,
+      lastUpdated date DEFAULT NULL,
+      publisher text,
+      author text
 
 );
 
@@ -103,8 +110,8 @@ CREATE TABLE vain.subject_book (
   `;
 
 // INSERTS --
-const insertBook = `INSERT INTO book ( title, type, subject, year, description, authorship, publisher, author, notes, located, modifiedBy, lastUpdated, namedPersons) 
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, 'System', now() $11)
+const insertBook = `INSERT INTO book ( type, authorship, subject, title, year, description, namedPersons, notes, located, modifiedBy, lastUpdated, publisher, author) 
+ VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9,'System', now(), $10, $11)
   `;
 
 const insertNewPublisher = `INSERT INTO vain.publisher ( publisher, publisherlocation, publisherfull) VALUES ($1, $2, $3);`;

@@ -3,7 +3,7 @@ process.on('unhandledRejection', (reason, promise) => {
 	console.log(reason + '          ' + promise);
 });
 
-// import variables from vainDBSQL.js
+//import vars from sql.js
 const {
 	createDB,
 	insertBook,
@@ -23,9 +23,9 @@ const {
 	getSubjectWithBookIDFromBook,
 	insertNewSubjectBook,
 	scrubTables,
-} = require('./vainDBSQL');
+} = require('./vainDBSQL.js');
 
-// import variables from cleanData.js
+// import vars from logic.js
 const {
 	fixdescriptionandnotes,
 	fixtypeandgenre,
@@ -39,12 +39,13 @@ const {
 	publisherBookArray,
 	publisherPublisherArray,
 	publisheridBookidArray,
-} = require('./cleanData');
+} = require('./cleanData.js');
 
-const { credentials, credentialsMain } = require('./connection');
-
+//import vars from creds.js
+const { credentials, credentialsMain } = require('./connection.js');
+//create postgres pool and client
 const { Pool, Client } = require('pg');
-
+//import nodejs tools
 var pgtools = require('pgtools');
 const fs = require('fs');
 const readline = require('readline');
@@ -77,6 +78,7 @@ function readLines({ input }) {
 	});
 	return output;
 }
+
 //check if vain_db already exists
 async function checkForVainDB() {
 	const client = await poolMain.connect();
@@ -95,7 +97,7 @@ async function checkForVainDB() {
 async function CreateDB() {
 	const client = new Client(credentials);
 	await client.connect();
-	const now = await client.query(createDBs);
+	const now = await client.query(createDB);
 	await client.end();
 	console.log(now);
 	return now;
