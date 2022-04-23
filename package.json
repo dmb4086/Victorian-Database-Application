@@ -2,7 +2,9 @@
   "name": "Victorian-Database-Application",
   "version": "1.0.0",
   "dependencies": {
+    "csv-parser": "^3.0.0",
     "pg": "^8.7.3",
-    "pgtools": "^0.1.1"
+    "pgtools": "^0.1.1",
+    "tsv": "^0.2.0"
   }
 }

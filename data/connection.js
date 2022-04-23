@@ -5,7 +5,7 @@ let password = 'password';
 const credentialsMain = {
     user: userid,
     host: "localhost",
-    database: "postgres",
+    database: "vain",
     password: password,
     port: 5432,
     Connection: 'keep-alive',
