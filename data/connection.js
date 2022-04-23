@@ -1,23 +1,11 @@
-let userid = 'devbhatt';
-let password = 'password';
+const Pool = require('pg').Pool;
 
+const pool = new Pool({
+	user: 'postgres',
+	password: 'password',
+	port: 5432,
+	database: 'vain',
+	host: 'localhost',
+});
 
-const credentialsMain = {
-    user: userid,
-    host: "localhost",
-    database: "vain",
-    password: password,
-    port: 5432,
-    Connection: 'keep-alive',
-  };
-
-  const credentials = {
-    user: userid,
-    host: "localhost",
-    database: "vain",
-    password: password,
-    port: 5432,
-    Connection: 'keep-alive',
-  };
-
-  module.exports = {credentialsMain, credentials};
+module.exports = { pool };
