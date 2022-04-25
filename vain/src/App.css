@@ -3,7 +3,48 @@ body {
 	color: #ffffff;
 }
 
-.book-app > row {
+.book-app > .row {
 	overflow-x: auto;
 	flex-wrap: nowrap;
+	/* padding-right: 1px; */
+	/* width: 0%; */
+}
+
+.row > * {
+	width: 15vw;
+}
+
+.heading {
+	font-size: 1.5em;
+	font-weight: bold;
+	text-align: left;
+	margin-left: 1em;
+	font-family: avenir;
+	letter-spacing: 3px;
+}
+
+.image-container {
+	position: relative;
+	transition: transform 0.2s ease;
+}
+
+.image-container:hover {
+	transform: scale(1.1);
+	cursor: pointer;
+}
+
+.image-container:hover .overlay {
+	opacity: 1;
+}
+.overlay {
+	position: absolute;
+	background: rgba(0, 0, 0, 0.5);
+	transition: opacity 0.2s ease;
+	opacity: 0;
+	width: 90%;
+	height: 50%;
+	bottom: 0;
+	font-size: 20px;
+	text-align: center;
+	padding: 20px;
 }
