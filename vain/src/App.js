@@ -1,6 +1,6 @@
-import logo from './logo.svg';
-import './App.css';
 import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 import BookList from './components/bookList';
 
 function App() {
@@ -93,8 +93,10 @@ function App() {
 		},
 	]);
 	return (
-		<div className="App">
-			<BookList books={books} />
+		<div className="container-fluid book-app">
+			<div className="row">
+				<BookList books={books} />
+			</div>
 		</div>
 	);
 }

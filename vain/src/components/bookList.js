@@ -5,7 +5,12 @@ const BookList = (props) => {
 		<>
 			{props.books.map((book, index) => (
 				<div>
-					<img src="images/book_cover.jpg" alt="book cover"></img>
+					<img
+						src="https://i.ibb.co/QchWZGQ/book-cover.jpg"
+						alt="book cover"
+						width="200vw"
+						height="250vh"
+					></img>
 				</div>
 			))}
 		</>
